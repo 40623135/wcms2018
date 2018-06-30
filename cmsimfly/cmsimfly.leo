@@ -108,6 +108,7 @@
 <v t="amd.20160714231925.1"><vh>sizeof_fmt</vh></v>
 <v t="amd.20160715154701.1"><vh>ssavePage</vh></v>
 <v t="amd.20160714232059.1"><vh>syntaxhighlight</vh></v>
+<v t="leo.20180630233136.1"><vh>syntaxhighlight2</vh></v>
 <v t="amd.20160714231606.1"><vh>tinymce_editor (#4)</vh></v>
 <v t="amd.20160714232232.1"><vh>unique</vh></v>
 </v>
@@ -799,11 +800,11 @@ def set_admin_css():
 &lt;html&gt;&lt;head&gt;
 &lt;meta http-equiv="content-type" content="text/html;charset=utf-8"&gt;
 &lt;title&gt;CMSimply - Simple Cloud CMS in Python 3&lt;/title&gt; \
-&lt;link rel="stylesheet" type="text/css" href="/static/cmsimply.css"&gt;
+&lt;link rel="stylesheet" type="text/css" href="static/cmsimply.css"&gt;
 '''+syntaxhighlight()
 
     outstring += '''
-&lt;script src="/static/jquery.js"&gt;&lt;/script&gt;
+&lt;script src="static/jquery.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript"&gt;
 $(function(){
     $("ul.topmenu&gt; li:has(ul) &gt; a").append('&lt;div class="arrow-right"&gt;&lt;/div&gt;');
@@ -1988,7 +1989,7 @@ def generate_pages():
     _curdir = os.path.join(os.getcwd(), os.path.dirname(__file__))
     # 這裡需要建立專門寫出 html 的 write_page
     # index.html
-    file = open(_curdir+"\\index.html", "w", encoding="utf-8")
+    file = open(_curdir+"\\content\\index.html", "w", encoding="utf-8")
     file.write(get_page2(None, 0))
     file.close()
     # sitemap
@@ -2033,13 +2034,13 @@ def get_page2(heading, edit):
             last_page = ""
         else:
             #last_page = head[page_order-1]+" &lt;&lt; &lt;a href='/get_page/"+head[page_order-1]+"'&gt;Previous&lt;/a&gt;"
-            last_page = head[page_order-1]+" &lt;&lt; &lt;a href='/content/"+head[page_order-1]+".html'&gt;Previous&lt;/a&gt;"
+            last_page = head[page_order-1]+" &lt;&lt; &lt;a href='"+head[page_order-1]+".html'&gt;Previous&lt;/a&gt;"
         if page_order == len(head) - 1:
             # no next page
             next_page = ""
         else:
             #next_page = "&lt;a href='/get_page/"+head[page_order+1]+"'&gt;Next&lt;/a&gt; &gt;&gt; "+ head[page_order+1]
-            next_page = "&lt;a href='/content/"+head[page_order+1]+".html'&gt;Next&lt;/a&gt; &gt;&gt; "+ head[page_order+1]
+            next_page = "&lt;a href='"+head[page_order+1]+".html'&gt;Next&lt;/a&gt; &gt;&gt; "+ head[page_order+1]
         if len(page_order_list) &gt; 1:
             return_content += last_page+" "+next_page+"&lt;br /&gt;&lt;h1&gt;"+heading+"&lt;/h1&gt;"+page_content_list[i]+"&lt;br /&gt;"+last_page+" "+next_page+"&lt;br /&gt;&lt;hr&gt;"
             pagedata_duplicate = "&lt;h"+level[page_order]+"&gt;"+heading+"&lt;/h"+level[page_order]+"&gt;"+page_content_list[i]
@@ -2092,32 +2093,32 @@ def get_page2(heading, edit):
             directory += "&lt;ul&gt;"
             #directory += "&lt;li&gt;&lt;a href='/get_page/"+head[index]+"'&gt;"+head[index]+"&lt;/a&gt;"
             # 改為連結到 content/標題.html
-            directory += "&lt;li&gt;&lt;a href='/content/"+head[index]+".html'&gt;"+head[index]+"&lt;/a&gt;"
+            directory += "&lt;li&gt;&lt;a href='"+head[index]+".html'&gt;"+head[index]+"&lt;/a&gt;"
         elif level[index] == current_level:
             if level[index] == 1:
                 if sitemap:
                     # 改為連結到 content/標題.html
                     #directory += "&lt;li&gt;&lt;a href='/get_page/"+head[index]+"'&gt;"+head[index]+"&lt;/a&gt;"
-                    directory += "&lt;li&gt;&lt;a href='/content/"+head[index]+".html'&gt;"+head[index]+"&lt;/a&gt;"
+                    directory += "&lt;li&gt;&lt;a href='"+head[index]+".html'&gt;"+head[index]+"&lt;/a&gt;"
                 else:
                     #directory += "&lt;li class='topmenu'&gt;&lt;a href='/get_page/"+head[index]+"'&gt;"+head[index]+"&lt;/a&gt;"
-                    directory += "&lt;li class='topmenu'&gt;&lt;a href='/content/"+head[index]+".html'&gt;"+head[index]+"&lt;/a&gt;"
+                    directory += "&lt;li class='topmenu'&gt;&lt;a href='content/"+head[index]+".html'&gt;"+head[index]+"&lt;/a&gt;"
             else:
                 #directory += "&lt;li&gt;&lt;a href='/get_page/"+head[index]+"'&gt;"+head[index]+"&lt;/a&gt;"
-                directory += "&lt;li&gt;&lt;a href='/content/"+head[index]+".html'&gt;"+head[index]+"&lt;/a&gt;"
+                directory += "&lt;li&gt;&lt;a href='"+head[index]+".html'&gt;"+head[index]+"&lt;/a&gt;"
         else:
             directory += "&lt;/li&gt;"*(int(current_level) - int(level[index]))
             directory += "&lt;/ul&gt;"*(int(current_level) - int(level[index]))
             if level[index] == 1:
                 if sitemap:
                     #directory += "&lt;li&gt;&lt;a href='/get_page/"+head[index]+"'&gt;"+head[index]+"&lt;/a&gt;"
-                    directory += "&lt;li&gt;&lt;a href='/content/"+head[index]+".html'&gt;"+head[index]+"&lt;/a&gt;"
+                    directory += "&lt;li&gt;&lt;a href='"+head[index]+".html'&gt;"+head[index]+"&lt;/a&gt;"
                 else:
                     #directory += "&lt;li class='topmenu'&gt;&lt;a href='/get_page/"+head[index]+"'&gt;"+head[index]+"&lt;/a&gt;"
-                    directory += "&lt;li class='topmenu'&gt;&lt;a href='/content/"+head[index]+".html'&gt;"+head[index]+"&lt;/a&gt;"
+                    directory += "&lt;li class='topmenu'&gt;&lt;a href='"+head[index]+".html'&gt;"+head[index]+"&lt;/a&gt;"
             else:
                 #directory += "&lt;li&gt;&lt;a href='/get_page/"+head[index]+"'&gt;"+head[index]+"&lt;/a&gt;"
-                directory += "&lt;li&gt;&lt;a href='/content/"+head[index]+".html'&gt;"+head[index]+"&lt;/a&gt;"
+                directory += "&lt;li&gt;&lt;a href='"+head[index]+".html'&gt;"+head[index]+"&lt;/a&gt;"
         current_level = level[index]
     directory += "&lt;/li&gt;&lt;/ul&gt;"
     return directory
@@ -2128,11 +2129,11 @@ def set_admin_css2():
 &lt;html&gt;&lt;head&gt;
 &lt;meta http-equiv="content-type" content="text/html;charset=utf-8"&gt;
 &lt;title&gt;CMSimply - Simple Cloud CMS in Python 3&lt;/title&gt; \
-&lt;link rel="stylesheet" type="text/css" href="/static/cmsimply.css"&gt;
-'''+syntaxhighlight()
+&lt;link rel="stylesheet" type="text/css" href="./../static/cmsimply.css"&gt;
+'''+syntaxhighlight2()
 
     outstring += '''
-&lt;script src="/static/jquery.js"&gt;&lt;/script&gt;
+&lt;script src="./../static/jquery.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript"&gt;
 $(function(){
     $("ul.topmenu&gt; li:has(ul) &gt; a").append('&lt;div class="arrow-right"&gt;&lt;/div&gt;');
@@ -2153,8 +2154,8 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 &lt;/head&gt;&lt;header&gt;&lt;h1&gt;'''+site_title+'''&lt;/h1&gt; \
 &lt;confmenu&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="/index.html"&gt;Home&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="/content/sitemap.html"&gt;SiteMap&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="index.html"&gt;Home&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="sitemap.html"&gt;SiteMap&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="/edit_page"&gt;Edit All&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="'''+str(request.url)+'''/1"&gt;Edit&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="/edit_config"&gt;Config&lt;/a&gt;&lt;/li&gt;
@@ -2176,11 +2177,11 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 &lt;html&gt;&lt;head&gt;
 &lt;meta http-equiv="content-type" content="text/html;charset=utf-8"&gt;
 &lt;title&gt;CMSimply - Simple Cloud CMS in Python 3&lt;/title&gt; \
-&lt;link rel="stylesheet" type="text/css" href="/static/cmsimply.css"&gt;
-'''+syntaxhighlight()
+&lt;link rel="stylesheet" type="text/css" href="./../static/cmsimply.css"&gt;
+'''+syntaxhighlight2()
 
     outstring += '''
-&lt;script src="/static/jquery.js"&gt;&lt;/script&gt;
+&lt;script src="./../static/jquery.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript"&gt;
 $(function(){
     $("ul.topmenu&gt; li:has(ul) &gt; a").append('&lt;div class="arrow-right"&gt;&lt;/div&gt;');
@@ -2200,8 +2201,8 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 &lt;/head&gt;&lt;header&gt;&lt;h1&gt;'''+site_title+'''&lt;/h1&gt; \
 &lt;confmenu&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="/index.html"&gt;Home&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="/content/sitemap.html"&gt;Site Map&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="index.html"&gt;Home&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="sitemap.html"&gt;Site Map&lt;/a&gt;&lt;/li&gt;
 '''
     if isAdmin():
         outstring += '''
@@ -2230,5 +2231,21 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 整體依附在 OpenShift 的部分必須刪除?
 
 可能在 generate_pages  時針對 local_data/downloads 與 images 目錄中的引用,  將動態格式轉為靜態格式</t>
+<t tx="leo.20180630233136.1">def syntaxhighlight2():
+    return '''
+&lt;script type="text/javascript" src="./../static/syntaxhighlighter/shCore.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="./../static/syntaxhighlighter/shBrushJScript.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="./../static/syntaxhighlighter/shBrushJava.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="./../static/syntaxhighlighter/shBrushPython.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="./../static/syntaxhighlighter/shBrushSql.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="./../static/syntaxhighlighter/shBrushXml.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="./../static/syntaxhighlighter/shBrushPhp.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="./../static/syntaxhighlighter/shBrushCpp.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="./../static/syntaxhighlighter/shBrushCss.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="./../static/syntaxhighlighter/shBrushCSharp.js"&gt;&lt;/script&gt;
+&lt;link type="text/css" rel="stylesheet" href="./../static/syntaxhighlighter/css/shCoreDefault.css"/&gt;
+&lt;script type="text/javascript"&gt;SyntaxHighlighter.all();&lt;/script&gt;
+'''
+</t>
 </tnodes>
 </leo_file>

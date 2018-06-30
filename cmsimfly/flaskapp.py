@@ -615,7 +615,7 @@ def generate_pages():
     _curdir = os.path.join(os.getcwd(), os.path.dirname(__file__))
     # 這裡需要建立專門寫出 html 的 write_page
     # index.html
-    file = open(_curdir+"\\index.html", "w", encoding="utf-8")
+    file = open(_curdir+"\\content\\index.html", "w", encoding="utf-8")
     file.write(get_page2(None, 0))
     file.close()
     # sitemap
@@ -720,13 +720,13 @@ def get_page2(heading, edit):
             last_page = ""
         else:
             #last_page = head[page_order-1]+" << <a href='/get_page/"+head[page_order-1]+"'>Previous</a>"
-            last_page = head[page_order-1]+" << <a href='/content/"+head[page_order-1]+".html'>Previous</a>"
+            last_page = head[page_order-1]+" << <a href='"+head[page_order-1]+".html'>Previous</a>"
         if page_order == len(head) - 1:
             # no next page
             next_page = ""
         else:
             #next_page = "<a href='/get_page/"+head[page_order+1]+"'>Next</a> >> "+ head[page_order+1]
-            next_page = "<a href='/content/"+head[page_order+1]+".html'>Next</a> >> "+ head[page_order+1]
+            next_page = "<a href='"+head[page_order+1]+".html'>Next</a> >> "+ head[page_order+1]
         if len(page_order_list) > 1:
             return_content += last_page+" "+next_page+"<br /><h1>"+heading+"</h1>"+page_content_list[i]+"<br />"+last_page+" "+next_page+"<br /><hr>"
             pagedata_duplicate = "<h"+level[page_order]+">"+heading+"</h"+level[page_order]+">"+page_content_list[i]
@@ -1303,32 +1303,32 @@ def render_menu2(head, level, page, sitemap=0):
             directory += "<ul>"
             #directory += "<li><a href='/get_page/"+head[index]+"'>"+head[index]+"</a>"
             # 改為連結到 content/標題.html
-            directory += "<li><a href='/content/"+head[index]+".html'>"+head[index]+"</a>"
+            directory += "<li><a href='"+head[index]+".html'>"+head[index]+"</a>"
         elif level[index] == current_level:
             if level[index] == 1:
                 if sitemap:
                     # 改為連結到 content/標題.html
                     #directory += "<li><a href='/get_page/"+head[index]+"'>"+head[index]+"</a>"
-                    directory += "<li><a href='/content/"+head[index]+".html'>"+head[index]+"</a>"
+                    directory += "<li><a href='"+head[index]+".html'>"+head[index]+"</a>"
                 else:
                     #directory += "<li class='topmenu'><a href='/get_page/"+head[index]+"'>"+head[index]+"</a>"
-                    directory += "<li class='topmenu'><a href='/content/"+head[index]+".html'>"+head[index]+"</a>"
+                    directory += "<li class='topmenu'><a href='content/"+head[index]+".html'>"+head[index]+"</a>"
             else:
                 #directory += "<li><a href='/get_page/"+head[index]+"'>"+head[index]+"</a>"
-                directory += "<li><a href='/content/"+head[index]+".html'>"+head[index]+"</a>"
+                directory += "<li><a href='"+head[index]+".html'>"+head[index]+"</a>"
         else:
             directory += "</li>"*(int(current_level) - int(level[index]))
             directory += "</ul>"*(int(current_level) - int(level[index]))
             if level[index] == 1:
                 if sitemap:
                     #directory += "<li><a href='/get_page/"+head[index]+"'>"+head[index]+"</a>"
-                    directory += "<li><a href='/content/"+head[index]+".html'>"+head[index]+"</a>"
+                    directory += "<li><a href='"+head[index]+".html'>"+head[index]+"</a>"
                 else:
                     #directory += "<li class='topmenu'><a href='/get_page/"+head[index]+"'>"+head[index]+"</a>"
-                    directory += "<li class='topmenu'><a href='/content/"+head[index]+".html'>"+head[index]+"</a>"
+                    directory += "<li class='topmenu'><a href='"+head[index]+".html'>"+head[index]+"</a>"
             else:
                 #directory += "<li><a href='/get_page/"+head[index]+"'>"+head[index]+"</a>"
-                directory += "<li><a href='/content/"+head[index]+".html'>"+head[index]+"</a>"
+                directory += "<li><a href='"+head[index]+".html'>"+head[index]+"</a>"
         current_level = level[index]
     directory += "</li></ul>"
     return directory
@@ -1452,11 +1452,11 @@ def set_admin_css():
 <html><head>
 <meta http-equiv="content-type" content="text/html;charset=utf-8">
 <title>CMSimply - Simple Cloud CMS in Python 3</title> \
-<link rel="stylesheet" type="text/css" href="/static/cmsimply.css">
+<link rel="stylesheet" type="text/css" href="static/cmsimply.css">
 '''+syntaxhighlight()
 
     outstring += '''
-<script src="/static/jquery.js"></script>
+<script src="static/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
     $("ul.topmenu> li:has(ul) > a").append('<div class="arrow-right"></div>');
@@ -1500,11 +1500,11 @@ def set_admin_css2():
 <html><head>
 <meta http-equiv="content-type" content="text/html;charset=utf-8">
 <title>CMSimply - Simple Cloud CMS in Python 3</title> \
-<link rel="stylesheet" type="text/css" href="/static/cmsimply.css">
-'''+syntaxhighlight()
+<link rel="stylesheet" type="text/css" href="./../static/cmsimply.css">
+'''+syntaxhighlight2()
 
     outstring += '''
-<script src="/static/jquery.js"></script>
+<script src="./../static/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
     $("ul.topmenu> li:has(ul) > a").append('<div class="arrow-right"></div>');
@@ -1525,8 +1525,8 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 </head><header><h1>'''+site_title+'''</h1> \
 <confmenu>
 <ul>
-<li><a href="/index.html">Home</a></li>
-<li><a href="/content/sitemap.html">SiteMap</a></li>
+<li><a href="index.html">Home</a></li>
+<li><a href="sitemap.html">SiteMap</a></li>
 <li><a href="/edit_page">Edit All</a></li>
 <li><a href="'''+str(request.url)+'''/1">Edit</a></li>
 <li><a href="/edit_config">Config</a></li>
@@ -1600,11 +1600,11 @@ def set_css2():
 <html><head>
 <meta http-equiv="content-type" content="text/html;charset=utf-8">
 <title>CMSimply - Simple Cloud CMS in Python 3</title> \
-<link rel="stylesheet" type="text/css" href="/static/cmsimply.css">
-'''+syntaxhighlight()
+<link rel="stylesheet" type="text/css" href="./../static/cmsimply.css">
+'''+syntaxhighlight2()
 
     outstring += '''
-<script src="/static/jquery.js"></script>
+<script src="./../static/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
     $("ul.topmenu> li:has(ul) > a").append('<div class="arrow-right"></div>');
@@ -1624,8 +1624,8 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 </head><header><h1>'''+site_title+'''</h1> \
 <confmenu>
 <ul>
-<li><a href="/index.html">Home</a></li>
-<li><a href="/content/sitemap.html">Site Map</a></li>
+<li><a href="index.html">Home</a></li>
+<li><a href="sitemap.html">Site Map</a></li>
 '''
     if isAdmin():
         outstring += '''
@@ -1728,6 +1728,21 @@ def syntaxhighlight():
 <script type="text/javascript" src="/static/syntaxhighlighter/shBrushCss.js"></script>
 <script type="text/javascript" src="/static/syntaxhighlighter/shBrushCSharp.js"></script>
 <link type="text/css" rel="stylesheet" href="/static/syntaxhighlighter/css/shCoreDefault.css"/>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+'''
+def syntaxhighlight2():
+    return '''
+<script type="text/javascript" src="./../static/syntaxhighlighter/shCore.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushJScript.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushJava.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushPython.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushSql.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushXml.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushPhp.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushCpp.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushCss.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushCSharp.js"></script>
+<link type="text/css" rel="stylesheet" href="./../static/syntaxhighlighter/css/shCoreDefault.css"/>
 <script type="text/javascript">SyntaxHighlighter.all();</script>
 '''
 def tinymce_editor(menu_input=None, editor_content=None, page_order=None):
