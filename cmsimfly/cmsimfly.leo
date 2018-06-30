@@ -20,8 +20,11 @@
 <v t="amd.20160715000709.1" a="E"><vh>註解</vh>
 <v t="amd.20160715211540.1"><vh>處理 url 與 edit</vh></v>
 <v t="amd.20160715213810.1"><vh>必須處理 downloads 與 images 目錄</vh></v>
-<v t="leo.20180625155103.1" a="E"><vh>改為 pybean based</vh>
+<v t="leo.20180625155103.1"><vh>改為 pybean based</vh>
 <v t="leo.20180625155310.1"><vh>資料庫設計</vh></v>
+</v>
+<v t="leo.20180630135634.1" a="E"><vh>新增 generate_pages 功能</vh>
+<v t="leo.20180630211407.1"><vh>必須修改頁面內容</vh></v>
 </v>
 </v>
 <v t="amd.20160718002238.1"><vh>參考資料</vh></v>
@@ -46,61 +49,67 @@
 <v t="amd.20160714230833.2" a="E"><vh>@clean flaskapp.py</vh>
 <v t="amd.20160714230833.3"><vh>&lt;&lt;declarations&gt;&gt;</vh></v>
 <v t="amd.20160714230833.4"><vh>&lt;&lt;registers&gt;&gt;</vh></v>
-<v t="amd.20160715152825.1"><vh>index</vh></v>
-<v t="amd.20160714230833.16"><vh>download</vh></v>
-<v t="amd.20160718212924.1"><vh>downloads</vh></v>
-<v t="amd.20160714230833.17"><vh>send_images</vh></v>
-<v t="amd.20160714230833.18"><vh>send_static</vh></v>
-<v t="amd.20160714230833.20"><vh>send_file</vh></v>
-<v t="amd.20160714231055.1"><vh>get_page</vh></v>
-<v t="amd.20160714231319.1"><vh>parse_content</vh></v>
-<v t="amd.20160714231359.1"><vh>render_menu</vh></v>
-<v t="amd.20160714231440.1"><vh>search_content</vh></v>
-<v t="amd.20160714231555.1"><vh>editorhead (#4)</vh></v>
-<v t="amd.20160715161642.1"><vh>edit_config</vh></v>
-<v t="amd.20160715000858.1"><vh>editorfoot</vh></v>
-<v t="amd.20160714233320.1"><vh>edit_page</vh></v>
-<v t="amd.20160714231606.1"><vh>tinymce_editor (#4)</vh></v>
-<v t="amd.20160714231619.1"><vh>parse_config</vh></v>
-<v t="amd.20160715154923.1"><vh>fileuploadform</vh></v>
-<v t="amd.20160715155334.1"><vh>fileaxupload</vh></v>
-<v t="amd.20160715155703.1"><vh>flvplayer</vh></v>
-<v t="amd.20160714231628.1"><vh>file_selector_script (#4)</vh></v>
-<v t="amd.20160714231640.1"><vh>file_lister</vh></v>
-<v t="amd.20160715160325.1"><vh>file_selector (#4)</vh></v>
-<v t="amd.20160714232140.1"><vh>downloadselect_access_list</vh></v>
-<v t="amd.20160714231903.1"><vh>downloadlist_access_list</vh></v>
-<v t="amd.20160715160505.1"><vh>download_list</vh></v>
-<v t="amd.20160714232205.1"><vh>imageselect_access_list</vh></v>
-<v t="amd.20160714231915.1"><vh>imagelist_access_list</vh></v>
-<v t="amd.20160714232156.1"><vh>loadlist_access_list</vh></v>
-<v t="amd.20160714231925.1"><vh>sizeof_fmt</vh></v>
-<v t="amd.20160714232232.1"><vh>unique</vh></v>
-<v t="amd.20160714231934.1"><vh>set_admin_css</vh></v>
-<v t="amd.20160714231944.1"><vh>set_footer</vh></v>
-<v t="amd.20160714231953.1"><vh>file_get_contents</vh></v>
-<v t="amd.20160714232059.1"><vh>syntaxhighlight</vh></v>
-<v t="amd.20160714232359.1"><vh>set_css</vh></v>
-<v t="amd.20160714232513.1"><vh>isAdmin</vh></v>
-<v t="amd.20160714232921.1"><vh>login</vh></v>
-<v t="amd.20160715154321.1"><vh>logout</vh></v>
 <v t="amd.20160714233131.1"><vh>checkLogin</vh></v>
-<v t="amd.20160715161730.1"><vh>saveConfig</vh></v>
-<v t="amd.20160715154534.1"><vh>savePage</vh></v>
-<v t="amd.20160715154701.1"><vh>ssavePage</vh></v>
-<v t="amd.20160715155918.1"><vh>imageuploadform</vh></v>
-<v t="amd.20160715160036.1"><vh>imageaxupload</vh></v>
-<v t="amd.20160715160642.1"><vh>image_list</vh></v>
-<v t="amd.20160715160836.1"><vh>load_list</vh></v>
-<v t="amd.20160715161018.1"><vh>image_delete_file</vh></v>
 <v t="amd.20160717235504.1"><vh>delete_file</vh></v>
 <v t="amd.20160715161158.1"><vh>doDelete</vh></v>
-<v t="amd.20160715161251.1"><vh>image_doDelete</vh></v>
-<v t="amd.20160715161352.1"><vh>search_form</vh></v>
 <v t="amd.20160715161508.1"><vh>doSearch</vh></v>
-<v t="amd.20160715161923.1"><vh>listdir</vh></v>
-<v t="amd.20160715162003.1"><vh>sitemap</vh></v>
+<v t="amd.20160714230833.16"><vh>download</vh></v>
+<v t="amd.20160715160505.1"><vh>download_list</vh></v>
+<v t="amd.20160714231903.1"><vh>downloadlist_access_list</vh></v>
+<v t="amd.20160718212924.1"><vh>downloads</vh></v>
+<v t="amd.20160714232140.1"><vh>downloadselect_access_list</vh></v>
+<v t="amd.20160715161642.1"><vh>edit_config</vh></v>
+<v t="amd.20160714233320.1"><vh>edit_page</vh></v>
+<v t="amd.20160715000858.1"><vh>editorfoot</vh></v>
+<v t="amd.20160714231555.1"><vh>editorhead (#4)</vh></v>
 <v t="amd.20160715154211.1"><vh>error_log</vh></v>
+<v t="amd.20160714231953.1"><vh>file_get_contents</vh></v>
+<v t="amd.20160714231640.1"><vh>file_lister</vh></v>
+<v t="amd.20160715160325.1"><vh>file_selector (#4)</vh></v>
+<v t="amd.20160714231628.1"><vh>file_selector_script (#4)</vh></v>
+<v t="amd.20160715155334.1"><vh>fileaxupload</vh></v>
+<v t="amd.20160715154923.1"><vh>fileuploadform</vh></v>
+<v t="amd.20160715155703.1"><vh>flvplayer</vh></v>
+<v t="leo.20180630142017.1"><vh>generate_pages</vh></v>
+<v t="amd.20160714231055.1"><vh>get_page</vh></v>
+<v t="leo.20180630144325.1"><vh>get_page2</vh></v>
+<v t="amd.20160715161018.1"><vh>image_delete_file</vh></v>
+<v t="amd.20160715161251.1"><vh>image_doDelete</vh></v>
+<v t="amd.20160715160642.1"><vh>image_list</vh></v>
+<v t="amd.20160715160036.1"><vh>imageaxupload</vh></v>
+<v t="amd.20160714231915.1"><vh>imagelist_access_list</vh></v>
+<v t="amd.20160714232205.1"><vh>imageselect_access_list</vh></v>
+<v t="amd.20160715155918.1"><vh>imageuploadform</vh></v>
+<v t="amd.20160715152825.1"><vh>index</vh></v>
+<v t="amd.20160714232513.1"><vh>isAdmin</vh></v>
+<v t="amd.20160715161923.1"><vh>listdir</vh></v>
+<v t="amd.20160715160836.1"><vh>load_list</vh></v>
+<v t="amd.20160714232156.1"><vh>loadlist_access_list</vh></v>
+<v t="amd.20160714232921.1"><vh>login</vh></v>
+<v t="amd.20160715154321.1"><vh>logout</vh></v>
+<v t="amd.20160714231619.1"><vh>parse_config</vh></v>
+<v t="amd.20160714231319.1"><vh>parse_content</vh></v>
+<v t="amd.20160714231359.1"><vh>render_menu</vh></v>
+<v t="leo.20180630203542.1"><vh>render_menu2</vh></v>
+<v t="amd.20160715161730.1"><vh>saveConfig</vh></v>
+<v t="amd.20160715154534.1"><vh>savePage</vh></v>
+<v t="amd.20160714231440.1"><vh>search_content</vh></v>
+<v t="amd.20160715161352.1"><vh>search_form</vh></v>
+<v t="amd.20160714230833.20"><vh>send_file</vh></v>
+<v t="amd.20160714230833.17"><vh>send_images</vh></v>
+<v t="amd.20160714230833.18"><vh>send_static</vh></v>
+<v t="amd.20160714231934.1"><vh>set_admin_css</vh></v>
+<v t="leo.20180630203707.1"><vh>set_admin_css2</vh></v>
+<v t="amd.20160714232359.1"><vh>set_css</vh></v>
+<v t="leo.20180630203825.1"><vh>set_css2</vh></v>
+<v t="amd.20160714231944.1"><vh>set_footer</vh></v>
+<v t="amd.20160715162003.1"><vh>sitemap</vh></v>
+<v t="leo.20180630203449.1"><vh>sitemap2</vh></v>
+<v t="amd.20160714231925.1"><vh>sizeof_fmt</vh></v>
+<v t="amd.20160715154701.1"><vh>ssavePage</vh></v>
+<v t="amd.20160714232059.1"><vh>syntaxhighlight</vh></v>
+<v t="amd.20160714231606.1"><vh>tinymce_editor (#4)</vh></v>
+<v t="amd.20160714232232.1"><vh>unique</vh></v>
 </v>
 </v>
 </vnodes>
@@ -240,7 +249,9 @@ def download():
 
 </t>
 <t tx="amd.20160714230833.17"># setup static directory
-@app.route('/images/&lt;path:path&gt;')
+#@app.route('/images/&lt;path:path&gt;')
+# 為了配合 generate_pages 靜態網頁需求, 加入 /local_data
+@app.route('/local_data/images/&lt;path:path&gt;')
 def send_images(path):
     return send_from_directory(data_dir+"/images/", path)
 </t>
@@ -741,7 +752,7 @@ def file_lister(directory, type=None, page=1, item_per_page=10):
         fileSize = sizeof_fmt(os.path.getsize(download_dir+"/"+files[index]))
         # images files
         if fileExtension == ".png" or fileExtension == ".jpg" or fileExtension == ".gif":
-            outstring += '&lt;input type="checkbox" name="filename" value="'+files[index]+'"&gt;&lt;a href="javascript:;" onClick="window.open(\'/download/?type=files&amp;filename='+ \
+            outstring += '&lt;input type="checkbox" name="filename" value="'+files[index]+'"&gt;&lt;a href="javascript:;" onClick="window.open(\'/local_data/images/'+ \
             files[index]+'\',\'images\', \'catalogmode\',\'scrollbars\')"&gt;'+files[index]+'&lt;/a&gt; ('+str(fileSize)+')&lt;br /&gt;'
         # stl files
         elif fileExtension == ".stl":
@@ -749,11 +760,11 @@ def file_lister(directory, type=None, page=1, item_per_page=10):
             files[index]+'\',\'images\', \'catalogmode\',\'scrollbars\')"&gt;'+files[index]+'&lt;/a&gt; ('+str(fileSize)+')&lt;br /&gt;'
         # flv files
         elif fileExtension == ".flv":
-            outstring += '&lt;input type="checkbox" name="filename" value="'+files[index]+'"&gt;&lt;a href="javascript:;" onClick="window.open(\'/flvplayer?filepath=/download/?type=files&amp;filename='+ \
+            outstring += '&lt;input type="checkbox" name="filename" value="'+files[index]+'"&gt;&lt;a href="javascript:;" onClick="window.open(\'/flvplayer?filepath=/local_data/downloads/'+ \
             files[index]+'\',\'images\', \'catalogmode\',\'scrollbars\')"&gt;'+files[index]+'&lt;/a&gt; ('+str(fileSize)+')&lt;br /&gt;'
         # direct download files
         else:
-            outstring += "&lt;input type='checkbox' name='filename' value='"+files[index]+"'&gt;&lt;a href='/download/?type=files&amp;filename="+files[index]+"'&gt;"+files[index]+"&lt;/a&gt; ("+str(fileSize)+")&lt;br /&gt;"
+            outstring += "&lt;input type='checkbox' name='filename' value='"+files[index]+"'&gt;&lt;a href='/local_data/downloads/"+files[index]+"'&gt;"+files[index]+"&lt;/a&gt; ("+str(fileSize)+")&lt;br /&gt;"
     return outstring
 
 </t>
@@ -869,7 +880,7 @@ def downloadselect_access_list(files, starti, endi):
     for index in range(int(starti)-1, int(endi)):
         fileName, fileExtension = os.path.splitext(files[index])
         fileSize = os.path.getsize(download_dir+"/"+files[index])
-        outstring += '''&lt;input type="checkbox" name="filename" value="'''+files[index]+'''"&gt;&lt;a href="#" onclick='window.setLink("/download/?type=files&amp;filename='''+ \
+        outstring += '''&lt;input type="checkbox" name="filename" value="'''+files[index]+'''"&gt;&lt;a href="#" onclick='window.setLink("/local_data/images/'''+ \
         files[index]+'''",0); return false;'&gt;'''+ \
         files[index]+'''&lt;/a&gt; ('''+str(sizeof_fmt(fileSize))+''')&lt;br /&gt;'''
     return outstring
@@ -931,10 +942,10 @@ a.xhfbfile:hover{
     for index in range(int(starti)-1, int(endi)):
         fileName, fileExtension = os.path.splitext(files[index])
         fileSize = os.path.getsize(image_dir+"/"+files[index])
-        outstring += '''&lt;a class="xhfbfile" href="#" onclick='window.setLink("/download/?type=images&amp;filename='''+ \
+        outstring += '''&lt;a class="xhfbfile" href="#" onclick='window.setLink("/local_data/images/'''+ \
         files[index]+'''",0); return false;'&gt;'''+ \
         files[index]+'''&lt;span style="position: absolute; z-index: 4;"&gt;&lt;br /&gt;
-        &lt;img src="/download/?type=images&amp;filename='''+ \
+        &lt;img src="/local_data/images/'''+ \
         files[index]+'''" width="150px"/&gt;&lt;/span&gt;&lt;/a&gt; ('''+str(sizeof_fmt(fileSize))+''')&lt;br /&gt;'''
     return outstring
 
@@ -1947,7 +1958,7 @@ http://stackoverflow.com/questions/12247681/tinymce-is-adding-nbsp-instead-of-th
 
 現在標題中有空白時會使用 + 但是正確的編碼應該是 %20</t>
 <t tx="amd.20160718212924.1"># downloads 方法主要將位於 downloads 目錄下的檔案送回瀏覽器
-@app.route('/downloads/&lt;path:path&gt;')
+@app.route('/local_data/downloads/&lt;path:path&gt;')
 def downloads(path):
   return send_from_directory(data_dir+"/downloads/", path)
 </t>
@@ -1965,5 +1976,259 @@ content - 文章內容
 memo - 額外註解欄位
 
 </t>
+<t tx="leo.20180630135634.1">可以將 CMSimfly 轉為 html pages 
+其中以 index.html 為起始點
+結合 local_data/downloads, local_data/images, static 與 content 目錄中的子頁面, 可以放入 Github Pages 或 Fossil SCM doc 目錄中, 成為靜態網站內容.
+
+</t>
+<t tx="leo.20180630142017.1">@app.route('/generate_pages')
+def generate_pages():
+    import os
+    # 確定程式檔案所在目錄, 在 Windows 有最後的反斜線
+    _curdir = os.path.join(os.getcwd(), os.path.dirname(__file__))
+    # 這裡需要建立專門寫出 html 的 write_page
+    # index.html
+    file = open(_curdir+"\\index.html", "w", encoding="utf-8")
+    file.write(get_page2(None, 0))
+    file.close()
+    # sitemap
+    file = open(_curdir+"\\content\\sitemap.html", "w", encoding="utf-8")
+    file.write(sitemap2())
+    file.close()
+    # 根據 content.htm 內容, 逐一產生各頁面檔案
+    # 在此也要同時配合 render_menu2, 產生對應的 anchor 連結
+    head, level, page = parse_content()
+    for i in range(len(head)):
+        file = open(_curdir+"\\content\\"+head[i]+".html", "w", encoding="utf-8")
+        file.write(get_page2(head[i], 0))
+        file.close()
+    # generate each page html under content directory
+    return "generate_pages"
+
+</t>
+<t tx="leo.20180630144325.1"># seperate page need heading and edit variables, if edit=1, system will enter edit mode
+# single page edit will use ssavePage to save content, it means seperate save page
+'''
+@app.route('/get_page2')
+@app.route('/get_page2/&lt;heading&gt;', defaults={'edit': 0})
+@app.route('/get_page2/&lt;heading&gt;/&lt;int:edit&gt;')
+'''
+def get_page2(heading, edit):
+    head, level, page = parse_content()
+    directory = render_menu2(head, level, page)
+    if heading == None:
+        heading = head[0]
+    # 因為同一 heading 可能有多頁, 因此不可使用 head.index(heading) 搜尋 page_order
+    page_order_list, page_content_list = search_content(head, page, heading)
+    return_content = ""
+    pagedata = ""
+    outstring = ""
+    outstring_duplicate = ""
+    pagedata_duplicate = ""
+    outstring_list = []
+    for i in range(len(page_order_list)):
+        #page_order = head.index(heading)
+        page_order = page_order_list[i]
+        if page_order == 0:
+            last_page = ""
+        else:
+            #last_page = head[page_order-1]+" &lt;&lt; &lt;a href='/get_page/"+head[page_order-1]+"'&gt;Previous&lt;/a&gt;"
+            last_page = head[page_order-1]+" &lt;&lt; &lt;a href='/content/"+head[page_order-1]+".html'&gt;Previous&lt;/a&gt;"
+        if page_order == len(head) - 1:
+            # no next page
+            next_page = ""
+        else:
+            #next_page = "&lt;a href='/get_page/"+head[page_order+1]+"'&gt;Next&lt;/a&gt; &gt;&gt; "+ head[page_order+1]
+            next_page = "&lt;a href='/content/"+head[page_order+1]+".html'&gt;Next&lt;/a&gt; &gt;&gt; "+ head[page_order+1]
+        if len(page_order_list) &gt; 1:
+            return_content += last_page+" "+next_page+"&lt;br /&gt;&lt;h1&gt;"+heading+"&lt;/h1&gt;"+page_content_list[i]+"&lt;br /&gt;"+last_page+" "+next_page+"&lt;br /&gt;&lt;hr&gt;"
+            pagedata_duplicate = "&lt;h"+level[page_order]+"&gt;"+heading+"&lt;/h"+level[page_order]+"&gt;"+page_content_list[i]
+            outstring_list.append(last_page+" "+next_page+"&lt;br /&gt;"+ tinymce_editor(directory, cgi.escape(pagedata_duplicate), page_order))
+        else:
+            return_content += last_page+" "+next_page+"&lt;br /&gt;&lt;h1&gt;"+heading+"&lt;/h1&gt;"+page_content_list[i]+"&lt;br /&gt;"+last_page+" "+next_page
+            
+        pagedata += "&lt;h"+level[page_order]+"&gt;"+heading+"&lt;/h"+level[page_order]+"&gt;"+page_content_list[i]
+        # 利用 cgi.escape() 將 specialchar 轉成只能顯示的格式
+        outstring += last_page+" "+next_page+"&lt;br /&gt;"+ tinymce_editor(directory, cgi.escape(pagedata), page_order)
+    
+    # edit=0 for viewpage
+    if edit == 0:
+        return set_css2()+"&lt;div class='container'&gt;&lt;nav&gt;"+ \
+        directory+"&lt;/nav&gt;&lt;section&gt;"+return_content+"&lt;/section&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"
+    # enter edit mode
+    else:
+        # check if administrator
+        if not isAdmin():
+            redirect(url_for('login'))
+        else:
+            if len(page_order_list) &gt; 1:
+                # 若碰到重複頁面頁印, 且要求編輯, 則導向 edit_page
+                #return redirect("/edit_page")
+                for i in range(len(page_order_list)):
+                    outstring_duplicate += outstring_list[i]+"&lt;br /&gt;&lt;hr&gt;"
+                return outstring_duplicate
+            else:
+            #pagedata = "&lt;h"+level[page_order]+"&gt;"+heading+"&lt;/h"+level[page_order]+"&gt;"+search_content(head, page, heading)
+            #outstring = last_page+" "+next_page+"&lt;br /&gt;"+ tinymce_editor(directory, cgi.escape(pagedata), page_order)
+                return outstring
+</t>
+<t tx="leo.20180630203449.1">def sitemap2():
+    edit = 0
+    head, level, page = parse_content()
+    directory = render_menu2(head, level, page)
+    sitemap = render_menu2(head, level, page, sitemap=1)
+    return set_css2()+"&lt;div class='container'&gt;&lt;nav&gt;"+ \
+    directory+"&lt;/nav&gt;&lt;section&gt;&lt;h1&gt;Site Map&lt;/h1&gt;"+sitemap+"&lt;/section&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"
+</t>
+<t tx="leo.20180630203542.1">def render_menu2(head, level, page, sitemap=0):
+    directory = ""
+    current_level = level[0]
+    if sitemap:
+        directory += "&lt;ul&gt;"
+    else:
+        directory += "&lt;ul id='css3menu1' class='topmenu'&gt;"
+    for index in range(len(head)):
+        if level[index] &gt; current_level:
+            directory += "&lt;ul&gt;"
+            #directory += "&lt;li&gt;&lt;a href='/get_page/"+head[index]+"'&gt;"+head[index]+"&lt;/a&gt;"
+            # 改為連結到 content/標題.html
+            directory += "&lt;li&gt;&lt;a href='/content/"+head[index]+".html'&gt;"+head[index]+"&lt;/a&gt;"
+        elif level[index] == current_level:
+            if level[index] == 1:
+                if sitemap:
+                    # 改為連結到 content/標題.html
+                    #directory += "&lt;li&gt;&lt;a href='/get_page/"+head[index]+"'&gt;"+head[index]+"&lt;/a&gt;"
+                    directory += "&lt;li&gt;&lt;a href='/content/"+head[index]+".html'&gt;"+head[index]+"&lt;/a&gt;"
+                else:
+                    #directory += "&lt;li class='topmenu'&gt;&lt;a href='/get_page/"+head[index]+"'&gt;"+head[index]+"&lt;/a&gt;"
+                    directory += "&lt;li class='topmenu'&gt;&lt;a href='/content/"+head[index]+".html'&gt;"+head[index]+"&lt;/a&gt;"
+            else:
+                #directory += "&lt;li&gt;&lt;a href='/get_page/"+head[index]+"'&gt;"+head[index]+"&lt;/a&gt;"
+                directory += "&lt;li&gt;&lt;a href='/content/"+head[index]+".html'&gt;"+head[index]+"&lt;/a&gt;"
+        else:
+            directory += "&lt;/li&gt;"*(int(current_level) - int(level[index]))
+            directory += "&lt;/ul&gt;"*(int(current_level) - int(level[index]))
+            if level[index] == 1:
+                if sitemap:
+                    #directory += "&lt;li&gt;&lt;a href='/get_page/"+head[index]+"'&gt;"+head[index]+"&lt;/a&gt;"
+                    directory += "&lt;li&gt;&lt;a href='/content/"+head[index]+".html'&gt;"+head[index]+"&lt;/a&gt;"
+                else:
+                    #directory += "&lt;li class='topmenu'&gt;&lt;a href='/get_page/"+head[index]+"'&gt;"+head[index]+"&lt;/a&gt;"
+                    directory += "&lt;li class='topmenu'&gt;&lt;a href='/content/"+head[index]+".html'&gt;"+head[index]+"&lt;/a&gt;"
+            else:
+                #directory += "&lt;li&gt;&lt;a href='/get_page/"+head[index]+"'&gt;"+head[index]+"&lt;/a&gt;"
+                directory += "&lt;li&gt;&lt;a href='/content/"+head[index]+".html'&gt;"+head[index]+"&lt;/a&gt;"
+        current_level = level[index]
+    directory += "&lt;/li&gt;&lt;/ul&gt;"
+    return directory
+</t>
+<t tx="leo.20180630203707.1"># set_admin_css for administrator
+def set_admin_css2():
+    outstring = '''&lt;!doctype html&gt;
+&lt;html&gt;&lt;head&gt;
+&lt;meta http-equiv="content-type" content="text/html;charset=utf-8"&gt;
+&lt;title&gt;CMSimply - Simple Cloud CMS in Python 3&lt;/title&gt; \
+&lt;link rel="stylesheet" type="text/css" href="/static/cmsimply.css"&gt;
+'''+syntaxhighlight()
+
+    outstring += '''
+&lt;script src="/static/jquery.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+$(function(){
+    $("ul.topmenu&gt; li:has(ul) &gt; a").append('&lt;div class="arrow-right"&gt;&lt;/div&gt;');
+    $("ul.topmenu &gt; li ul li:has(ul) &gt; a").append('&lt;div class="arrow-right"&gt;&lt;/div&gt;');
+});
+&lt;/script&gt;
+'''
+    # SSL for OpenShift operation
+    if inOpenshift:
+        outstring += '''
+&lt;script type="text/javascript"&gt;
+if ((location.href.search(/http:/) != -1) &amp;&amp; (location.href.search(/login/) != -1)) \
+window.location= 'https://' + location.host + location.pathname + location.search;
+&lt;/script&gt;
+'''
+    site_title, password = parse_config()
+    outstring += '''
+&lt;/head&gt;&lt;header&gt;&lt;h1&gt;'''+site_title+'''&lt;/h1&gt; \
+&lt;confmenu&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/index.html"&gt;Home&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/content/sitemap.html"&gt;SiteMap&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/edit_page"&gt;Edit All&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="'''+str(request.url)+'''/1"&gt;Edit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/edit_config"&gt;Config&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/search_form"&gt;Search&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/imageuploadform"&gt;Image Upload&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/image_list"&gt;Image List&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/fileuploadform"&gt;File Upload&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/download_list"&gt;File List&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/logout"&gt;Logout&lt;/a&gt;&lt;/li&gt;
+'''
+    outstring += '''
+&lt;/ul&gt;
+&lt;/confmenu&gt;&lt;/header&gt;
+'''
+    return outstring
+</t>
+<t tx="leo.20180630203825.1">def set_css2():
+    outstring = '''&lt;!doctype html&gt;
+&lt;html&gt;&lt;head&gt;
+&lt;meta http-equiv="content-type" content="text/html;charset=utf-8"&gt;
+&lt;title&gt;CMSimply - Simple Cloud CMS in Python 3&lt;/title&gt; \
+&lt;link rel="stylesheet" type="text/css" href="/static/cmsimply.css"&gt;
+'''+syntaxhighlight()
+
+    outstring += '''
+&lt;script src="/static/jquery.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+$(function(){
+    $("ul.topmenu&gt; li:has(ul) &gt; a").append('&lt;div class="arrow-right"&gt;&lt;/div&gt;');
+    $("ul.topmenu &gt; li ul li:has(ul) &gt; a").append('&lt;div class="arrow-right"&gt;&lt;/div&gt;');
+});
+&lt;/script&gt;
+'''
+    if inOpenshift:
+        outstring += '''
+&lt;script type="text/javascript"&gt;
+if ((location.href.search(/http:/) != -1) &amp;&amp; (location.href.search(/login/) != -1)) \
+window.location= 'https://' + location.host + location.pathname + location.search;
+&lt;/script&gt;
+'''
+    site_title, password = parse_config()
+    outstring += '''
+&lt;/head&gt;&lt;header&gt;&lt;h1&gt;'''+site_title+'''&lt;/h1&gt; \
+&lt;confmenu&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/index.html"&gt;Home&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/content/sitemap.html"&gt;Site Map&lt;/a&gt;&lt;/li&gt;
+'''
+    if isAdmin():
+        outstring += '''
+&lt;li&gt;&lt;a href="/edit_page"&gt;Edit All&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="'''+str(request.url)+'''/1"&gt;Edit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/edit_config"&gt;Config&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/search_form"&gt;Search&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/imageuploadform"&gt;image upload&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/image_list"&gt;image list&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/fileuploadform"&gt;file upload&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/download_list"&gt;file list&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/logout"&gt;logout&lt;/a&gt;&lt;/li&gt;
+'''
+    else:
+        outstring += '''
+&lt;li&gt;&lt;a href="/login"&gt;login&lt;/a&gt;&lt;/li&gt;
+'''
+    outstring += '''
+&lt;/ul&gt;
+&lt;/confmenu&gt;&lt;/header&gt;
+'''
+    return outstring
+</t>
+<t tx="leo.20180630211407.1">圖片的連結必須改為靜態模式, 而非目前的動態模式
+
+整體依附在 OpenShift 的部分必須刪除?
+
+可能在 generate_pages  時針對 local_data/downloads 與 images 目錄中的引用,  將動態格式轉為靜態格式</t>
 </tnodes>
 </leo_file>
