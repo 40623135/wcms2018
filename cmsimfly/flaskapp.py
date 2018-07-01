@@ -299,13 +299,14 @@ def downloadlist_access_list(files, starti, endi):
 @app.route('/downloads/<path:path>')
 def downloads(path):
   return send_from_directory(_curdir+"/downloads/", path)
+
 # 與 file_selector 搭配的取檔程式
 def downloadselect_access_list(files, starti, endi):
     outstring = ""
     for index in range(int(starti)-1, int(endi)):
         fileName, fileExtension = os.path.splitext(files[index])
         fileSize = os.path.getsize(download_dir+"/"+files[index])
-        outstring += '''<input type="checkbox" name="filename" value="'''+files[index]+'''"><a href="#" onclick='window.setLink("/images/'''+ \
+        outstring += '''<input type="checkbox" name="filename" value="'''+files[index]+'''"><a href="#" onclick='window.setLink("/downloads/'''+ \
         files[index]+'''",0); return false;'>'''+ \
         files[index]+'''</a> ('''+str(sizeof_fmt(fileSize))+''')<br />'''
     return outstring

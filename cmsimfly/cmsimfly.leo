@@ -877,7 +877,7 @@ def downloadselect_access_list(files, starti, endi):
     for index in range(int(starti)-1, int(endi)):
         fileName, fileExtension = os.path.splitext(files[index])
         fileSize = os.path.getsize(download_dir+"/"+files[index])
-        outstring += '''&lt;input type="checkbox" name="filename" value="'''+files[index]+'''"&gt;&lt;a href="#" onclick='window.setLink("/images/'''+ \
+        outstring += '''&lt;input type="checkbox" name="filename" value="'''+files[index]+'''"&gt;&lt;a href="#" onclick='window.setLink("/downloads/'''+ \
         files[index]+'''",0); return false;'&gt;'''+ \
         files[index]+'''&lt;/a&gt; ('''+str(sizeof_fmt(fileSize))+''')&lt;br /&gt;'''
     return outstring
@@ -1958,6 +1958,7 @@ http://stackoverflow.com/questions/12247681/tinymce-is-adding-nbsp-instead-of-th
 @app.route('/downloads/&lt;path:path&gt;')
 def downloads(path):
   return send_from_directory(_curdir+"/downloads/", path)
+
 </t>
 <t tx="leo.20180625155103.1">2018.06.25 啟動
 

@@ -1,15 +1,16 @@
 <h1>CMSimfly</h1>
-<p>測試網站:&nbsp;<a href="https://cmsimfly-topuniversity.rhcloud.com">https://cmsimfly-topuniversity.rhcloud.com</a>&nbsp;</p>
-<p>CMS Simply Fly - 您在說什麼鬼東西?</p>
-<p>將 CMSimply 的 CherryPy 改為 Flask</p>
-<p>在近端 config 與 content.htm 位於 &nbsp;local_data 目錄中, 若在 OpenShift 則位於 &nbsp;Data persistent 目錄中</p>
-<h2>基本功能</h2>
+<p>動態網站:&nbsp; 以 <a href="https://www.heroku.com/">Heroku</a> 雲端應用服務建立</p>
+<p><a href="http://wcms-scrum3.herokuapp.com/">http://wcms-scrum3.herokuapp.com/</a>&nbsp;</p>
+<p>靜態網站:&nbsp; 以 Github Pages 服務建立</p>
+<p><a href="http://mde.tw/wcms2018/cmsimfly">http://mde.tw/wcms2018/cmsimfly</a>&nbsp;</p><h2>基本功能</h2>
+<p>動態功能:</p>
+<p>以 python wsgi.py 啟動</p>
 <p>在瀏覽器中管理網際檔案內容</p>
 <p>利用瀏覽器上傳檔案 (可同時上傳多個檔案)</p>
 <p>檔案包含一般常用數位檔案與影像檔案</p>
 <p>使用者並可直接在瀏覽器的頁面編輯區中引用檔案或顯示圖形檔案</p>
-<h2>操作問題</h2>
-<h1>學習 Python3</h1>
+<p>靜態網頁:</p>
+<p>在近端以 python -m http.server 執行, 或在 Github Pages 模式下執行.</p><h1>學習 Python3</h1>
 <p>CMSimfly 程式架構</p>
 <p>CMSimfly 使用的 Python3 程式語法</p>
 <p>CMSimfly 與機械設計</p>
@@ -40,13 +41,10 @@
 <p>人類還不會利用輪子提升物體移動效率之前, 要般動重物是非常辛苦的&nbsp;</p>
 <p>好的, 現在有了輪子 (還知道如何運用流體的浮力, 特別注意, 力可以是阻力, 也可以是浮力, 端看如何巧妙應用), 但是我們這一堆人要重複製造輪子嗎?</p>
 <p>機械者, 機巧之器械也!</p>
-<p>請以重複造輪子搜尋, 看大家如何說?</p>
-<p>一個人, 一群人, 一起做一件大事, 應該如何做? 各自做? 合作? 協同? 勾心鬥角地做? 還是?</p>
-<p>您作為一個大一新生, 您假如在完全不明瞭未來4年的 IT 使用情境, 就已經買了電腦桌機或筆電, 那你平常一定都是閉著眼睛走路....</p>
-<h1>Flask 使用手冊</h1>
-<p>新的資料</p>
-<p><a href="http://flask.pocoo.org/docs/0.10/.latex/Flask.pdf">http://flask.pocoo.org/docs/0.10/.latex/Flask.pdf</a></p>
-<p>local <a href="/download/?type=files&amp;filename=Flask.pdf">Flask.pdf</a>&nbsp;(表示 CMSimfly 的 downlosd 功能是正常的, 但是 downloads 則有問題!!</p>
+<p>請以重複造輪子搜尋, 看大家如何說?</p><h1>Flask 使用手冊</h1>
+<p>Flask 手冊:</p>
+<p><a href="https://media.readthedocs.org/pdf/flask/latest/flask.pdf">https://media.readthedocs.org/pdf/flask/latest/flask.pdf</a>&nbsp;</p>
+<p>local <a href="/downloads/flask.pdf">flask.pdf</a> (表示 CMSimfly 的 downlosd 功能是正常的, 但是 downloads 則有問題!!</p>
 <p>Micro 等級的 Python 網際程式框架指的是指保留核心基礎功能, 其他功能則以 plugin 附加</p>
 <p>特性是模組化強, 功能較具彈性</p>
 <p>Flask depends on two external libraries, Werkzeug and Jinja2.</p>
@@ -75,9 +73,7 @@ if __name__ == '__main__':
 <li>The function is given a name which is also used to generate URLs for that particular function, and returns the message we want to display in the user&rsquo;s browser.</li>
 <li>Finally we use the run() function to run the local server with our application. The if __name__ == '__main__': makes sure the server only runs if the script is executed directly from the Python interpreter and not used as an imported module.</li>
 <li>To stop the server, hit control-C.</li>
-</ol><h1>加上一頁</h1><p>這是新頁面的內容</p><p><img src="/images/gocycle4.png" alt="" width="587" height="471" /></p><h2>第二頁</h2>
-<p>可以放入第二頁</p>
-<p><img src="/images/lufu.JPG" alt="" width="344" height="592" /></p><h3>第三頁</h3>
-<p>這是第三頁</p>
-<p>以下為圖片</p>
-<p><img src="/images/gocycle4.png" alt="" width="587" height="471" /></p>
+</ol><h1>納入圖檔</h1>
+<p>以下為從 images 目錄引用的圖片檔案:</p>
+<p><img src="/images/gocycle4.png" alt="" width="587" height="471" /></p><h2>程式開發者</h2>
+<p><img src="/images/lufu.JPG" alt="" width="344" height="592" /></p>
