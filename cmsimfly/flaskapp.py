@@ -618,6 +618,9 @@ def generate_pages():
     # 在此也要同時配合 render_menu2, 產生對應的 anchor 連結
     head, level, page = parse_content()
     for i in range(len(head)):
+        # 在此必須要將頁面中的 /images/ 字串換為 images/, /downloads/ 換為 downloads/
+        # 因為 Flask 中靠 /images/ 取檔案, 但是一般 html 則採相對目錄取檔案
+        # 此一字串置換在 get_page2 中進行
         file = open(_curdir+"\\content\\"+head[i]+".html", "w", encoding="utf-8")
         file.write(get_page2(head[i], 0))
         file.close()
@@ -694,6 +697,11 @@ def get_page(heading, edit):
 '''
 def get_page2(heading, edit):
     head, level, page = parse_content()
+    
+    # 直接在此將 /images/ 換為 ./../images/, /downloads/ 換為 ./../downloads/, 以 content 為基準的相對目錄設定
+    page = [w.replace('/images/', './../images/') for w in page]
+    page = [w.replace('/downloads/', './../downloads/') for w in page]
+    
     directory = render_menu2(head, level, page)
     if heading == None:
         heading = head[0]
