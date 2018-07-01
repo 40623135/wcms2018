@@ -23,10 +23,8 @@ _curdir = os.path.join(os.getcwd(), os.path.dirname(__file__))
 import sys
 sys.path.append(_curdir)
 
-if 'OPENSHIFT_REPO_DIR' in os.environ.keys():
-    inOpenshift = True
-else:
-    inOpenshift = False
+# 由 init.py 中的 uwsgi = False 或 True 決定在 uwsgi 模式或近端模式執行
+
 #ends for cmsimfly
 
 # 假如隨後要利用 blueprint 架構時, 可以將程式放在子目錄中
@@ -36,19 +34,13 @@ else:
 
 # 確定程式檔案所在目錄, 在 Windows 有最後的反斜線
 _curdir = os.path.join(os.getcwd(), os.path.dirname(__file__))
-# 設定在雲端與近端的資料儲存目錄
-if 'OPENSHIFT_REPO_DIR' in os.environ.keys():
-    # 表示程式在雲端執行
-    data_dir = os.environ['OPENSHIFT_DATA_DIR']
-    static_dir = os.environ['OPENSHIFT_REPO_DIR']+"/static"
-    download_dir = os.environ['OPENSHIFT_DATA_DIR']+"/downloads"
-    image_dir = os.environ['OPENSHIFT_DATA_DIR']+"/images"
-else:
-    # 表示程式在近端執行
-    data_dir = _curdir + "/local_data/"
-    static_dir = _curdir + "/static"
-    download_dir = _curdir + "/local_data/downloads/"
-    image_dir = _curdir + "/local_data/images/"
+# 設定在 uwsgi 與近端的資料儲存目錄
+uwsgi = False
+# 表示程式在近端執行, 最後必須決定是由 init.py 或此地決定目錄設定
+config_dir = _curdir + "/config/"
+static_dir = _curdir + "/static"
+download_dir = _curdir + "/downloads/"
+image_dir = _curdir + "/images/"
 
 # 利用 init.py 啟動, 建立所需的相關檔案
 initobj = init.Init()
@@ -57,7 +49,7 @@ initobj = init.Init()
 app = Flask(__name__)
 
 # 設置隨後要在 blueprint 應用程式中引用的 global 變數
-app.config['data_dir'] = data_dir
+app.config['config_dir'] = config_dir
 app.config['static_dir'] = static_dir
 app.config['download_dir'] = download_dir
 
@@ -288,7 +280,7 @@ def downloadlist_access_list(files, starti, endi):
         fileSize = sizeof_fmt(os.path.getsize(download_dir+"/"+files[index]))
         # images files
         if fileExtension == ".png" or fileExtension == ".jpg" or fileExtension == ".gif":
-            outstring += '<input type="checkbox" name="filename" value="'+files[index]+'"><a href="javascript:;" onClick="window.open(\'/local_data/images/'+ \
+            outstring += '<input type="checkbox" name="filename" value="'+files[index]+'"><a href="javascript:;" onClick="window.open(\'/images/'+ \
             files[index]+'\',\'images\', \'catalogmode\',\'scrollbars\')">'+files[index]+'</a> ('+str(fileSize)+')<br />'
         # stl files
         elif fileExtension == ".stl":
@@ -296,24 +288,24 @@ def downloadlist_access_list(files, starti, endi):
             files[index]+'\',\'images\', \'catalogmode\',\'scrollbars\')">'+files[index]+'</a> ('+str(fileSize)+')<br />'
         # flv files
         elif fileExtension == ".flv":
-            outstring += '<input type="checkbox" name="filename" value="'+files[index]+'"><a href="javascript:;" onClick="window.open(\'/flvplayer?filepath=/local_data/downloads/'+ \
+            outstring += '<input type="checkbox" name="filename" value="'+files[index]+'"><a href="javascript:;" onClick="window.open(\'/flvplayer?filepath=/downloads/'+ \
             files[index]+'\',\'images\', \'catalogmode\',\'scrollbars\')">'+files[index]+'</a> ('+str(fileSize)+')<br />'
         # direct download files
         else:
-            outstring += "<input type='checkbox' name='filename' value='"+files[index]+"'><a href='/local_data/downloads/"+files[index]+"'>"+files[index]+"</a> ("+str(fileSize)+")<br />"
+            outstring += "<input type='checkbox' name='filename' value='"+files[index]+"'><a href='/downloads/"+files[index]+"'>"+files[index]+"</a> ("+str(fileSize)+")<br />"
     return outstring
 
 # downloads 方法主要將位於 downloads 目錄下的檔案送回瀏覽器
-@app.route('/local_data/downloads/<path:path>')
+@app.route('/downloads/<path:path>')
 def downloads(path):
-  return send_from_directory(data_dir+"/downloads/", path)
+  return send_from_directory(_curdir+"/downloads/", path)
 # 與 file_selector 搭配的取檔程式
 def downloadselect_access_list(files, starti, endi):
     outstring = ""
     for index in range(int(starti)-1, int(endi)):
         fileName, fileExtension = os.path.splitext(files[index])
         fileSize = os.path.getsize(download_dir+"/"+files[index])
-        outstring += '''<input type="checkbox" name="filename" value="'''+files[index]+'''"><a href="#" onclick='window.setLink("/local_data/images/'''+ \
+        outstring += '''<input type="checkbox" name="filename" value="'''+files[index]+'''"><a href="#" onclick='window.setLink("/images/'''+ \
         files[index]+'''",0); return false;'>'''+ \
         files[index]+'''</a> ('''+str(sizeof_fmt(fileSize))+''')<br />'''
     return outstring
@@ -349,7 +341,7 @@ def edit_page(edit):
     else:
         head, level, page = parse_content()
         directory = render_menu(head, level, page)
-        pagedata =file_get_contents(data_dir+"content.htm")
+        pagedata =file_get_contents(config_dir+"content.htm")
         outstring = tinymce_editor(directory, cgi.escape(pagedata))
         return outstring
             
@@ -553,9 +545,9 @@ def fileaxupload():
         filename = request.args.get("ax-file-name")
         flag = request.args.get("start")
         if flag == "0":
-            file = open(data_dir+"downloads/"+filename, "wb")
+            file = open(_curdir+"/downloads/"+filename, "wb")
         else:
-            file = open(data_dir+"downloads/"+filename, "ab")
+            file = open(_curdir+"/downloads/"+filename, "ab")
         file.write(request.stream.read())
         file.close()
         return "files uploaded!"
@@ -907,9 +899,9 @@ def imageaxupload():
         filename = request.args.get("ax-file-name")
         flag = request.args.get("start")
         if flag == "0":
-            file = open(data_dir+"images/"+filename, "wb")
+            file = open(_curdir+"/images/"+filename, "wb")
         else:
-            file = open(data_dir+"images/"+filename, "ab")
+            file = open(_curdir+"/images/"+filename, "ab")
         file.write(request.stream.read())
         file.close()
         return "image files uploaded!"
@@ -961,10 +953,10 @@ a.xhfbfile:hover{
     for index in range(int(starti)-1, int(endi)):
         fileName, fileExtension = os.path.splitext(files[index])
         fileSize = os.path.getsize(image_dir+"/"+files[index])
-        outstring += '''<a class="xhfbfile" href="#" onclick='window.setLink("/local_data/images/'''+ \
+        outstring += '''<a class="xhfbfile" href="#" onclick='window.setLink("/images/'''+ \
         files[index]+'''",0); return false;'>'''+ \
         files[index]+'''<span style="position: absolute; z-index: 4;"><br />
-        <img src="/local_data/images/'''+ \
+        <img src="/images/'''+ \
         files[index]+'''" width="150px"/></span></a> ('''+str(sizeof_fmt(fileSize))+''')<br />'''
     return outstring
 
@@ -1037,11 +1029,11 @@ def isAdmin():
 # use to check directory variable data
 @app.route('/listdir')
 def listdir():
-    return download_dir +","+data_dir
+    return download_dir +","+config_dir
 
 @app.route('/load_list')
 def load_list(item_per_page=5, page=1, filedir=None, keyword=None):
-    files = os.listdir(data_dir+filedir+"_programs/")
+    files = os.listdir(config_dir+filedir+"_programs/")
     if keyword == None:
         pass
     else:
@@ -1153,7 +1145,7 @@ def loadlist_access_list(files, starti, endi, filedir):
     for index in range(int(starti)-1, int(endi)):
         fileName, fileExtension = os.path.splitext(files[index])
         fileExtension = fileExtension.lower()
-        fileSize = sizeof_fmt(os.path.getsize(data_dir+filedir+"_programs/"+files[index]))
+        fileSize = sizeof_fmt(os.path.getsize(config_dir+filedir+"_programs/"+files[index]))
         # images files
         if fileExtension == ".png" or fileExtension == ".jpg" or fileExtension == ".gif":
             outstring += '<input type="checkbox" name="filename" value="'+files[index]+'"><a href="javascript:;" onClick="window.open(\'/downloads/'+ \
@@ -1191,15 +1183,15 @@ def logout():
     flash('已經登出!')
     return redirect(url_for('login'))
 def parse_config():
-    if not os.path.isfile(data_dir+"config"):
+    if not os.path.isfile(config_dir+"config"):
         # create config file if there is no config file
-        file = open(data_dir+"config", "w", encoding="utf-8")
+        file = open(config_dir+"config", "w", encoding="utf-8")
         # default password is admin
         password="admin"
         hashed_password = hashlib.sha512(password.encode('utf-8')).hexdigest()
         file.write("siteTitle:CMSimply - Simple Cloud CMS in Python 3\npassword:"+hashed_password)
         file.close()
-    config = file_get_contents(data_dir+"config")
+    config = file_get_contents(config_dir+"config")
     config_data = config.split("\n")
     site_title = config_data[0].split(":")[1]
     password = config_data[1].split(":")[1]
@@ -1207,8 +1199,8 @@ def parse_config():
 def parse_content():
     from pybean import Store, SQLiteWriter
     # if no content.db, create database file with cms table
-    if not os.path.isfile(data_dir+"content.db"):
-        library = Store(SQLiteWriter(data_dir+"content.db", frozen=False))
+    if not os.path.isfile(config_dir+"content.db"):
+        library = Store(SQLiteWriter(config_dir+"content.db", frozen=False))
         cms = library.new("cms")
         cms.follow = 0
         cms.title = "head 1"
@@ -1217,16 +1209,16 @@ def parse_content():
         library.save(cms)
         library.commit()
     # if no content.htm, generate a head 1 and content 1 file
-    if not os.path.isfile(data_dir+"content.htm"):
+    if not os.path.isfile(config_dir+"content.htm"):
         # create content.htm if there is no content.htm
-        File = open(data_dir+"content.htm", "w", encoding="utf-8")
+        File = open(config_dir+"content.htm", "w", encoding="utf-8")
         File.write("<h1>head 1</h1>content 1")
         File.close()
-    subject = file_get_contents(data_dir+"content.htm")
+    subject = file_get_contents(config_dir+"content.htm")
     # deal with content without content
     if subject == "":
         # create content.htm if there is no content.htm
-        File = open(data_dir+"content.htm", "w", encoding="utf-8")
+        File = open(config_dir+"content.htm", "w", encoding="utf-8")
         File.write("<h1>head 1</h1>content 1")
         File.close()
     # deal with content has content but no heading
@@ -1352,7 +1344,7 @@ def saveConfig():
             hashed_password = old_password
         else:
             hashed_password = hashlib.sha512(password.encode('utf-8')).hexdigest()
-        file = open(data_dir+"config", "w", encoding="utf-8")
+        file = open(config_dir+"config", "w", encoding="utf-8")
         file.write("siteTitle:"+site_title+"\npassword:"+hashed_password)
         file.close()
         return set_css()+"<div class='container'><nav>"+ \
@@ -1366,7 +1358,7 @@ def savePage():
     if page_content == None:
         return error_log("no content to save!")
     # we need to check if page heading is duplicated
-    file = open(data_dir+"content.htm", "w", encoding="utf-8")
+    file = open(config_dir+"content.htm", "w", encoding="utf-8")
     # in Windows client operator, to avoid textarea add extra \n
     page_content = page_content.replace("\n","")
     file.write(page_content)
@@ -1374,7 +1366,7 @@ def savePage():
     '''
     # need to parse_content() to eliminate duplicate heading
     head, level, page = parse_content()
-    file = open(data_dir+"content.htm", "w", encoding="utf-8")
+    file = open(config_dir+"content.htm", "w", encoding="utf-8")
     for index in range(len(head)):
         file.write("<h"+str(level[index])+">"+str(head[index])+"</h"+str(level[index])+">"+str(page[index]))
     file.close()
@@ -1437,10 +1429,9 @@ def send_file(path):
 
 # setup static directory
 #@app.route('/images/<path:path>')
-# 為了配合 generate_pages 靜態網頁需求, 加入 /local_data
-@app.route('/local_data/images/<path:path>')
+@app.route('/images/<path:path>')
 def send_images(path):
-    return send_from_directory(data_dir+"/images/", path)
+    return send_from_directory(_curdir+"/images/", path)
 # setup static directory
 @app.route('/static/')
 def send_static():
@@ -1464,8 +1455,8 @@ $(function(){
 });
 </script>
 '''
-    # SSL for OpenShift operation
-    if inOpenshift:
+    # SSL for uwsgi operation
+    if uwsgi:
         outstring += '''
 <script type="text/javascript">
 if ((location.href.search(/http:/) != -1) && (location.href.search(/login/) != -1)) \
@@ -1512,8 +1503,8 @@ $(function(){
 });
 </script>
 '''
-    # SSL for OpenShift operation
-    if inOpenshift:
+    # SSL for uwsgi operation
+    if uwsgi:
         outstring += '''
 <script type="text/javascript">
 if ((location.href.search(/http:/) != -1) && (location.href.search(/login/) != -1)) \
@@ -1559,7 +1550,7 @@ $(function(){
 });
 </script>
 '''
-    if inOpenshift:
+    if uwsgi:
         outstring += '''
 <script type="text/javascript">
 if ((location.href.search(/http:/) != -1) && (location.href.search(/login/) != -1)) \
@@ -1612,7 +1603,7 @@ $(function(){
 });
 </script>
 '''
-    if inOpenshift:
+    if uwsgi:
         outstring += '''
 <script type="text/javascript">
 if ((location.href.search(/http:/) != -1) && (location.href.search(/login/) != -1)) \
@@ -1626,22 +1617,6 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 <ul>
 <li><a href="index.html">Home</a></li>
 <li><a href="sitemap.html">Site Map</a></li>
-'''
-    if isAdmin():
-        outstring += '''
-<li><a href="/edit_page">Edit All</a></li>
-<li><a href="'''+str(request.url)+'''/1">Edit</a></li>
-<li><a href="/edit_config">Config</a></li>
-<li><a href="/search_form">Search</a></li>
-<li><a href="/imageuploadform">image upload</a></li>
-<li><a href="/image_list">image list</a></li>
-<li><a href="/fileuploadform">file upload</a></li>
-<li><a href="/download_list">file list</a></li>
-<li><a href="/logout">logout</a></li>
-'''
-    else:
-        outstring += '''
-<li><a href="/login">login</a></li>
 '''
     outstring += '''
 </ul>
@@ -1692,7 +1667,7 @@ def ssavePage():
     page_content = page_content.replace("\n","")
     head, level, page = parse_content()
     original_head_title = head[int(page_order)]
-    file = open(data_dir+"content.htm", "w", encoding="utf-8")
+    file = open(config_dir+"content.htm", "w", encoding="utf-8")
     for index in range(len(head)):
         if index == int(page_order):
             file.write(page_content)
@@ -1746,7 +1721,7 @@ def syntaxhighlight2():
 <script type="text/javascript">SyntaxHighlighter.all();</script>
 '''
 def tinymce_editor(menu_input=None, editor_content=None, page_order=None):
-    sitecontent =file_get_contents(data_dir+"content.htm")
+    sitecontent =file_get_contents(config_dir+"content.htm")
     editor = set_admin_css()+editorhead()+'''</head>'''+editorfoot()
     # edit all pages
     if page_order == None:
